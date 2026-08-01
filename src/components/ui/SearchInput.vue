@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const model = defineModel<string>({ default: '' })
+const emit = defineEmits<{ (e: 'submit'): void }>()
 </script>
 
 <template>
@@ -21,12 +22,14 @@ const model = defineModel<string>({ default: '' })
         type="search"
         placeholder="Buscar Pokémon..."
         class="w-full bg-transparent outline-none placeholder:text-neutral-mid"
+        @keydown.enter="emit('submit')"
       />
     </label>
     <button
       type="button"
       class="grid h-12 w-12 place-items-center rounded-full bg-white shadow-sm"
       aria-label="Buscar"
+      @click="emit('submit')"
     >
       <svg
         class="h-5 w-5 text-neutral-mid"
