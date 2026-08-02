@@ -76,3 +76,12 @@ interface Relations {
 export interface TypeDamageRelations {
   damage_relations: Relations
 }
+
+interface Ability {
+  name: string
+  language: { name: string }
+}
+
+export interface AbilityDetail {
+  names: Ability[]
+}

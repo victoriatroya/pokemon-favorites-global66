@@ -26,3 +26,4 @@ export const getPokemonSpecies = createCachedFetcher<PokemonSpecies>((name) =>
 export const getTypeRelations = createCachedFetcher<TypeDamageRelations>((name) =>
   pokemonRepository.getType(name),
 )
+export const getAbility = createCachedFetcher((name) => pokemonRepository.getAbility(name))

@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { pokemonRepository } from '@/services/pokemonService'
 import type { PokemonDetail } from '@/types/pokemon'
 import { getPokemonDetail } from '@/services/pokemonCache'
+import { withMinDuration } from '@/utils/withMinDuration'
 
 const PAGE_SIZE = 20
 
@@ -18,8 +19,10 @@ export function usePokemonList() {
     isLoading.value = true
     error.value = null
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000))
-      const data = await pokemonRepository.getList(PAGE_SIZE, pokemons.value.length)
+      const isFirstLoad = pokemons.value.length === 0
+      const request = pokemonRepository.getList(PAGE_SIZE, pokemons.value.length)
+      const data = isFirstLoad ? await withMinDuration(request, 1200) : await request
+
       total.value = data.count
       const details = await Promise.all(data.results.map((r) => getPokemonDetail(r.name)))
       pokemons.value.push(...details)

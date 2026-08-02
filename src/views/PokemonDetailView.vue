@@ -2,7 +2,12 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import type { PokemonDetail, PokemonSpecies, TypeDamageRelations } from '@/types/pokemon'
-import { getPokemonDetail, getPokemonSpecies, getTypeRelations } from '@/services/pokemonCache'
+import {
+  getAbility,
+  getPokemonDetail,
+  getPokemonSpecies,
+  getTypeRelations,
+} from '@/services/pokemonCache'
 import { useFavoritesStore } from '@/stores/favorite'
 import { useClipboard } from '@/composables/useClipboard'
 import { formatPokemonShare } from '@/utils/formatPokemonShare'
@@ -23,7 +28,7 @@ import heightIcon from '@/assets/icons/height.svg'
 import pokeball from '@/assets/icons/pokeball.svg'
 import category from '@/assets/icons/category.svg'
 import { computeWeaknesses } from '@/utils/computeWeaknesses'
-import { getCategory, getDescription } from '@/utils/pokemonCategory'
+import { getAbilityName, getCategory, getDescription } from '@/utils/pokemonCategory'
 
 const props = defineProps<{ name: string }>()
 
@@ -31,10 +36,13 @@ const pokemon = ref<PokemonDetail | null>(null)
 const error = ref<string | null>(null)
 const species = ref<PokemonSpecies | null>(null)
 const weaknesses = ref<string[]>([])
+const abilityName = ref<string | null>(null)
 
 const router = useRouter()
 const favorites = useFavoritesStore()
 const { copied, copy } = useClipboard()
+
+abilityName.value = null
 
 watch(
   () => props.name,
@@ -63,6 +71,14 @@ watch(
           (weaknesses.value = computeWeaknesses(rels.map((r) => r.damage_relations))),
       )
       .catch((e) => console.error('[weaknesses]', e))
+
+    const firstAbility = detail.abilities[0]?.ability.name
+
+    if (firstAbility) {
+      getAbility(firstAbility)
+        .then((a) => (abilityName.value = getAbilityName(a)))
+        .catch(() => {})
+    }
   },
   { immediate: true },
 )
@@ -206,7 +222,7 @@ function onShare() {
         <AttributeCard
           :icon="pokeball"
           label="Habilidad"
-          :value="pokemon.abilities[0]?.ability.name ?? '—'"
+          :value="abilityName ?? pokemon.abilities[0]?.ability.name ?? '—'"
           class="capitalize"
         />
       </div>

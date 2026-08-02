@@ -3,6 +3,7 @@ import type {
   PokemonDetail,
   PokemonSpecies,
   TypeDamageRelations,
+  AbilityDetail,
 } from '@/types/pokemon'
 
 const BASE_URL = 'https://pokeapi.co/api/v2'
@@ -12,6 +13,7 @@ export interface IPokemonRepository {
   getByName(name: string): Promise<PokemonDetail>
   getSpecies(name: string): Promise<PokemonSpecies>
   getType(name: string): Promise<TypeDamageRelations>
+  getAbility(name: string): Promise<AbilityDetail>
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -32,5 +34,8 @@ export const pokemonRepository: IPokemonRepository = {
   },
   getType(name: string) {
     return fetchJson<TypeDamageRelations>(`${BASE_URL}/type/${name.toLowerCase()}`)
+  },
+  getAbility(name: string) {
+    return fetchJson<AbilityDetail>(`${BASE_URL}/ability/${name.toLowerCase()}`)
   },
 }
