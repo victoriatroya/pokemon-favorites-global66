@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import search from '@/assets/icons/search.svg'
+
 const model = defineModel<string>({ default: '' })
 const emit = defineEmits<{ (e: 'submit'): void }>()
 </script>
@@ -6,17 +8,7 @@ const emit = defineEmits<{ (e: 'submit'): void }>()
 <template>
   <div class="flex items-center gap-3">
     <label class="flex flex-1 items-center gap-2 rounded-full bg-white px-4 py-3 shadow-sm">
-      <svg
-        class="h-5 w-5 text-neutral-mid"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        aria-hidden="true"
-      >
-        <circle cx="11" cy="11" r="7" />
-        <path d="m20 20-3.5-3.5" />
-      </svg>
+      <img :src="search" alt="" />
       <input
         v-model="model"
         type="search"
@@ -25,23 +17,14 @@ const emit = defineEmits<{ (e: 'submit'): void }>()
         @keydown.enter="emit('submit')"
       />
     </label>
+
     <button
       type="button"
-      class="grid h-12 w-12 place-items-center rounded-full bg-white shadow-sm"
+      class="grid h-12 w-12 place-items-center rounded-full bg-white shadow-sm cursor-pointer"
       aria-label="Buscar"
       @click="emit('submit')"
     >
-      <svg
-        class="h-5 w-5 text-neutral-mid"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        aria-hidden="true"
-      >
-        <circle cx="11" cy="11" r="7" />
-        <path d="m20 20-3.5-3.5" />
-      </svg>
+      <img :src="search" alt="" />
     </button>
   </div>
 </template>

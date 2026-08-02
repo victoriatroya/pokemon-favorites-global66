@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import loader from '@/assets/images/loader.svg'
+
+defineProps<{
+  sizeClass?: string
+}>()
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center" role="status" aria-label="Loading">
-    <img :src="loader" alt="" class="pokeball w-[106px]" />
+  <div class="flex items-center justify-center" role="status" aria-label="Loading">
+    <img :src="loader" alt="" class="pokeball" :class="sizeClass ?? 'h-[106px] w-[106px]'" />
   </div>
 </template>
 

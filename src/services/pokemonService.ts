@@ -1,10 +1,17 @@
-import type { PokemonListResponse, PokemonDetail } from '@/types/pokemon'
+import type {
+  PokemonListResponse,
+  PokemonDetail,
+  PokemonSpecies,
+  TypeDamageRelations,
+} from '@/types/pokemon'
 
 const BASE_URL = 'https://pokeapi.co/api/v2'
 
 export interface IPokemonRepository {
   getList(limit: number, offset: number): Promise<PokemonListResponse>
   getByName(name: string): Promise<PokemonDetail>
+  getSpecies(name: string): Promise<PokemonSpecies>
+  getType(name: string): Promise<TypeDamageRelations>
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -19,5 +26,11 @@ export const pokemonRepository: IPokemonRepository = {
   },
   getByName(name: string) {
     return fetchJson<PokemonDetail>(`${BASE_URL}/pokemon/${name.toLowerCase()}`)
+  },
+  getSpecies(name: string) {
+    return fetchJson<PokemonSpecies>(`${BASE_URL}/pokemon-species/${name.toLowerCase()}`)
+  },
+  getType(name: string) {
+    return fetchJson<TypeDamageRelations>(`${BASE_URL}/type/${name.toLowerCase()}`)
   },
 }

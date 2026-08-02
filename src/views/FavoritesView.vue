@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { useFavoritesStore } from '@/stores/favorite'
 import { getPokemonDetail } from '@/services/pokemonCache'
 import type { PokemonDetail } from '@/types/pokemon'
@@ -7,6 +8,7 @@ import PokemonCard from '@/components/pokemon/PokemonCard.vue'
 import EmptyState from '@/components/ui/EmptyState.vue'
 import emptyFavorites from '@/assets/images/empty-state.svg'
 
+const router = useRouter()
 const favoritesStore = useFavoritesStore()
 const pokemons = ref<PokemonDetail[]>([])
 const error = ref<string | null>(null)
@@ -34,14 +36,34 @@ watch(
       description="Haz clic en el ícono de corazón de tus Pokémon favoritos y aparecerán aquí."
     />
     <p v-else-if="error" class="text-center text-primary">{{ error }}</p>
-    <div v-else class="flex flex-col gap-4">
+    <TransitionGroup v-else tag="div" name="card" class="relative grid grid-cols-1 gap-4">
       <PokemonCard
         v-for="p in pokemons"
         :key="p.id"
         :pokemon="p"
         :is-favorite="true"
+        removable
         @toggle-favorite="favoritesStore.toggleFavorite(p.name)"
+        @remove="favoritesStore.toggleFavorite(p.name)"
+        @select="router.push({ name: 'pokemon-detail', params: { name: p.name } })"
       />
-    </div>
+    </TransitionGroup>
   </main>
 </template>
+
+<style scoped>
+.card-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  position: absolute;
+  width: 100%;
+}
+.card-leave-to {
+  opacity: 0;
+  transform: translateX(32px);
+}
+.card-move {
+  transition: transform 0.3s ease;
+}
+</style>

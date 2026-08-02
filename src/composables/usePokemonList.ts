@@ -1,12 +1,12 @@
 import { ref, computed } from 'vue'
 import { pokemonRepository } from '@/services/pokemonService'
-import type { PokemonListItem } from '@/types/pokemon'
+import type { PokemonDetail } from '@/types/pokemon'
 import { getPokemonDetail } from '@/services/pokemonCache'
 
 const PAGE_SIZE = 20
 
 export function usePokemonList() {
-  const pokemons = ref<PokemonListItem[]>([])
+  const pokemons = ref<PokemonDetail[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
   const total = ref(0)

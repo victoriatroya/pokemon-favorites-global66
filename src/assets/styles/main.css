@@ -6,7 +6,27 @@
   --color-neutral-dark: #353535;
   --color-neutral-mid: #5e5e5e;
   --color-neutral-light: #f9f9f9;
+  --color-gray-dark: #e0e0e0;
+  --color-error: #cd3131;
+  --color-blue: #1e88e5;
+  --color-blue-dark: #1565c0;
 
-  --color-type-grass: #8bc34a;
+  --color-type-grass: #43a04780;
+  --color-type-grass-third: #43a047;
+  --color-type-grass-secondary: #8bc34a;
   --color-type-fire: #ff9800;
+  --color-type-normal: #8bc34a80;
+  --color-type-normal-secondary: #546e7a;
+  --color-type-fighting: #9c27b080;
+  --color-type-fighting-secondary: #e53935;
+  --color-type-poison-secondary: #9c27b0;
+  --color-type-ground: #fdd83580;
+  --color-type-ground-secondary: #ffb300;
+  --color-type-rock: #795548;
+  --color-type-ghost: #8e24aa80;
+  --color-type-ghost-secondary: #8e24aa;
+  --color-type-water: #2196f380;
+  --color-type-water-secondary: #2196f3;
+  --color-type-psychic-secondary: #673ab7;
+  --color-type-psychic: #673ab780;
 }
