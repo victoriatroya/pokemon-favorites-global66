@@ -5,7 +5,7 @@ export function getCategory(species: PokemonSpecies): string | null {
     species.genera.find((g) => g.language.name === 'es')?.genus ??
     species.genera.find((g) => g.language.name === 'en')?.genus
   if (!genus) return null
-  return genus.replace(/^Pokémon\s+/i, '').trim()
+  return genus.replace(/^Pokémon\s+|\s+Pokémon$/gi, '').trim()
 }
 
 export function getDescription(species: PokemonSpecies): string | null {
