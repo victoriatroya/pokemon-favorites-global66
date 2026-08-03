@@ -80,7 +80,7 @@ Con estado borrador (Aplicar confirma, Cancelar descarta), badge de filtros acti
 ## Adaptación mobile → desktop
 
 - Mobile-first Figma; en desktop el contenido crece **agregando columnas** (grid 1/2/3) en lugar de estirar cards.
-- **Navbar única responsive**: bottom bar fija en móvil (como el diseño), top bar sticky en desktop.
+- **NavBar única responsive**: bottom bar fija en móvil (como el diseño), top bar sticky en desktop.
 - **Onboarding** de dos pasos solo en la primera visita (flag en localStorage + navigation guard); en desktop se presenta como card centrada.
 
 ## Testing
@@ -94,4 +94,4 @@ Unit tests con Vitest (~28 tests) sobre las piezas de mayor valor:
 ## CI/CD
 
 CI — GitHub Actions: en cada push y pull request corre el pipeline (lint, unit tests y build con type-check). Instala dependencias con npm ci para builds reproducibles desde el lock file.
-CD — Cloudflare Pages: conectado al repositorio; cada push a main construye y despliega automáticamente, y cada rama genera un preview deployment con su propia URL. Al ser una SPA con history mode, Cloudflare Pages sirve index.html para las rutas directas
+CD — Cloudflare Pages: conectado al repositorio; cada push a main construye y despliega automáticamente, y cada rama genera un preview deployment con su propia URL.
