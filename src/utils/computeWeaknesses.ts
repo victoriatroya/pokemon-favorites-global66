@@ -7,7 +7,7 @@ export function computeWeaknesses(relations: TypeDamageRelations['damage_relatio
       multipliers.set(t.name, (multipliers.get(t.name) ?? 1) * 2)
     for (const t of rel.half_damage_from)
       multipliers.set(t.name, (multipliers.get(t.name) ?? 1) * 0.5)
-    for (const t of rel.no_damage_from) multipliers.set(t.name, (multipliers.get(t.name) ?? 1) * 0)
+    for (const t of rel.no_damage_from) multipliers.set(t.name, 0)
   }
   return [...multipliers.entries()].filter(([, m]) => m > 1).map(([name]) => name)
 }

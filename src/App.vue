@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
-import NavBar from './components/ui/Navbar.vue'
+import NavBar from '@/components/ui/NavBar.vue'
 
 const route = useRoute()
 </script>

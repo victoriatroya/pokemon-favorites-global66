@@ -16,10 +16,6 @@ interface PokemonAbilities {
   slot: number
 }
 
-interface Type {
-  type: NamedSource
-}
-
 interface OfficialArtwork {
   front_default: string
 }

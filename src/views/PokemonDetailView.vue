@@ -147,41 +147,42 @@ function onShare() {
         :alt="pokemon.name"
         class="relative h-56 w-56 object-contain md:h-64 md:w-64"
       />
-
-      <button
-        type="button"
-        class="cursor-pointer absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-neutral-dark shadow"
-        aria-label="Volver"
-        @click="goBack"
-      >
-        <svg
-          class="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+      <div class="absolute inset-0 mx-auto w-full max-w-2xl">
+        <button
+          type="button"
+          class="cursor-pointer absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-neutral-dark shadow"
+          aria-label="Volver"
+          @click="goBack"
         >
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
 
-      <button
-        type="button"
-        class="cursor-pointer absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full"
-        :aria-label="
-          favorites.isFavorite(pokemon.name) ? 'Quitar de favoritos' : 'Agregar a favoritos'
-        "
-        @click="favorites.toggleFavorite(pokemon.name)"
-      >
-        <img
-          :src="favorites.isFavorite(pokemon.name) ? favSolidIcon : favOutlineIcon"
-          alt=""
-          class="h-9 w-9"
-        />
-      </button>
+        <button
+          type="button"
+          class="cursor-pointer absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full"
+          :aria-label="
+            favorites.isFavorite(pokemon.name) ? 'Quitar de favoritos' : 'Agregar a favoritos'
+          "
+          @click="favorites.toggleFavorite(pokemon.name)"
+        >
+          <img
+            :src="favorites.isFavorite(pokemon.name) ? favSolidIcon : favOutlineIcon"
+            alt=""
+            class="h-9 w-9"
+          />
+        </button>
+      </div>
     </div>
 
     <section class="mx-auto w-full max-w-2xl px-6 py-6">
